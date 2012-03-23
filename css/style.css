@@ -1,0 +1,11 @@
+body{
+    background-image: url(../images/bkg.jpg);
+    margin: 0px;
+    padding: 0px;
+}
+
+body div{
+    background-image: url(../images/hackety-hack-hack.png);
+    width: 1100px;
+    height: 1000px;
+}

@@ -8,11 +8,11 @@
         COLUMN_ENTERPRISE = 'enterprise';
         
         var columns = [
-            new Column('Homepage', '#ccc', 200),
-            new Column('Talent', '#eee', 200),
-            new Column('Skills', '#ccc', 200),
-            new Column('Employers', '#eee', 200),
-            new Column('Enterprise', '#ccc', 200),
+            new Column('Homepage', COLUMN_HOMEPAGE, 'transparent', 180),
+            new Column('Talent', COLUMN_TALENT, 'transparent', 180),
+            new Column('Skills', COLUMN_SKILLS, 'transparent', 180),
+            new Column('Employers', COLUMN_EMPLOYERS, 'transparent', 180),
+            new Column('Enterprise', COLUMN_ENTERPRISE, 'transparent', 180),
         ];
         
         var users = new Users(new Data());

@@ -12,3 +12,11 @@ Users.prototype.generateUsers = function() {
         this.users.push(new User(u.sessionId, u.loggedIn, u.pageViews));
     }
 }
+
+Users.prototype.getUsers = function() {
+    if(this.users.length > 0){
+        return this.users;
+    }
+    
+    return false;
+}
