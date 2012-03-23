@@ -4,6 +4,7 @@ function Data (requestUrl, endpoint) {
     
     this.requestUrl = requestUrl;
     this.endpoint = endpoint;
+    this.dataIsLoaded = false;
     
     this.loadData();
 }
@@ -47,6 +48,7 @@ Data.prototype.loadData = function() {
             console.log(data);
             visualizer.data = data;
             visualizer.parseData();
+            visualizer.dataIsLoaded = true;
         }
     });
 }

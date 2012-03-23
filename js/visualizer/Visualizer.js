@@ -9,7 +9,7 @@ function Visualizer(columns, users) {
 }
 
 Visualizer.prototype.createCanvas = function () {
-    this.canvas = Raphael(0, 110, 1100, 1000);
+    this.canvas = Raphael(0, 110, 1800, 890);
 }
 
 Visualizer.prototype.drawColumns = function () {
@@ -22,15 +22,18 @@ Visualizer.prototype.drawColumns = function () {
        c[index] = canvas.rect(x, 0, value.width, '100%');
        c[index].attr('fill', value.color);
        c[index].attr('stroke', value.color);
-       x += value.width;
        value.x = x;
+       x += value.width;
+       
     });
 
 }
 
 Visualizer.prototype.drawUsers = function () {
     var visualizer = this;
+    console.log('draw users');
     $.each(this.users.getUsers(), function(index, user){
+        console.log('draw user');
         visualizer.drawDataPoints(user.getPageViews());
     });
 }
@@ -40,6 +43,7 @@ Visualizer.prototype.getColumnPosition = function (columnName) {
     $.each(this.columns, function(index, value){
         if(value.identifier === columnName){
             console.log('column x', value.x);
+            console.log('IDENTIFIER', value.identifier);
             position = value.x + value.width/2;
         }
     });
@@ -61,7 +65,8 @@ Visualizer.prototype.drawDataPoints = function (pageViews) {
         x = visualizer.getColumnPosition(value.target);
         console.log('X', x);
         
-        visualizer.canvas.circle(x, y, 10);
+        var c = visualizer.canvas.circle(x, y, 5);
+        c.attr('fill','rgba(255, 255, 255, 0.2)');
         
         if(typeof prevXY !== 'undefined'){
             visualizer.drawLine({x:x,y:y}, prevXY);
