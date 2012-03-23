@@ -57,11 +57,13 @@ body{
     font-size: 14px;
     font-weight: bold;
     color: #010101;
+    margin: 4px 0 8px;
 }
 
 .infocard p {
     color: #838383;
     font-size: 11px;
+    margin: 0;
 }
 
 .infocard img {
