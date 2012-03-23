@@ -1,13 +1,15 @@
-function Data () {
-    this.data = this.loadData();
+function Data (requestUrl, endpoint) {
     this.currentTimestamp = null;
     this.count = null;
     
-    this.parseData();
+    this.requestUrl = requestUrl;
+    this.endpoint = endpoint;
+    
+    this.loadData();
 }
 
 Data.prototype.parseData = function () {
-    this.loadData();
+    console.log(this.data.data.length);
     this.currentTimestamp = this.data.current_timestamp;
     this.count = this.data.data.length;
 }
@@ -20,42 +22,31 @@ Data.prototype.getObject = function (index) {
    return false;
 }
 
+Data.prototype.jsonpCallback = function(data) {
+    console.log(data);
+    this.data = data;
+    this.parseData();
+}
+
 Data.prototype.loadData = function() {
-    return {
-        current_timestamp: 1332508540,
-        data: [
-            {
-                sessionId: 100,
-                loggedIn: false,
-                pageViews: [
-                    {
-                        id: 1,
-                        target: 'homepage',
-                        timestamp: 1332508172
-                    },
-                    {
-                        id: 2,
-                        target: 'skills',
-                        timestamp: 1332508440
-                    }
-                ]
-            },
-            {
-                sessionId: 110,
-                loggedIn: false,
-                pageViews: [
-                    {
-                        id: 1,
-                        target: 'talent',
-                        timestamp: 1332508172
-                    },
-                    {
-                        id: 2,
-                        target: 'employers',
-                        timestamp: 1332508440
-                    }
-                ]
-            }
-        ]
-    };
+    var visualizer = this;
+    console.log('load Data');
+    $.ajax({
+        url: 'http://owa1.bravenewtalent.com/api.php',
+        type: 'GET',
+        dataType: 'jsonp',
+        context: visualizer,
+        data: {
+            owa_do: visualizer.endpoint,
+            owa_apiKey: API_KEY,
+            owa_siteId: SITE_ID,
+            owa_format: 'json',
+            owa_limit: 100
+        },
+        success: function(data, textStatus, jqXHR){
+            console.log(data);
+            visualizer.data = data;
+            visualizer.parseData();
+        }
+    });
 }
