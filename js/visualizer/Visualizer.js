@@ -1,9 +1,11 @@
-function Visualizer(columns) {
+function Visualizer(columns, users) {
     this.canvas = null;
     this.columns = columns;
+    this.users = users;
 
     this.createCanvas();
     this.drawColumns();
+    this.drawUsers();
 }
 
 Visualizer.prototype.createCanvas = function () {
@@ -22,4 +24,12 @@ Visualizer.prototype.drawColumns = function () {
        x += value.width;
     });
 
+}
+
+Visualizer.prototype.drawUsers = function () {
+    
+}
+
+Visualizer.prototype.drawDataPoints = function () {
+    
 }

@@ -1,5 +1,5 @@
-function User (id, timestamp, target) {
+function User (id, loggedIn, pageViews) {
     this.id = id;
-    this.timestamp = timestamp;
-    this.target = target;
+    this.loggedIn = loggedIn;
+    this.pageViews = pageViews;
 }
