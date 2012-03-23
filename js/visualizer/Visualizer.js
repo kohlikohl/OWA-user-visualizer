@@ -9,7 +9,7 @@ function Visualizer(columns, users) {
 }
 
 Visualizer.prototype.createCanvas = function () {
-    this.canvas = Raphael(0, 0, 1100, 1000);
+    this.canvas = Raphael(0, 110, 1100, 1000);
 }
 
 Visualizer.prototype.drawColumns = function () {

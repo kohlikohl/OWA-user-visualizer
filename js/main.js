@@ -1,7 +1,7 @@
-(function($) {
+
     $(document).ready(function() {
         //Globals
-        COLUMN_HOMEPAGE = 'homepage';
+        COLUMN_HOMEPAGE = '/home';
         COLUMN_TALENT = 'talent';
         COLUMN_SKILLS = 'skills';
         COLUMN_EMPLOYERS = 'employers';
@@ -15,8 +15,8 @@
             new Column('Enterprise', COLUMN_ENTERPRISE, 'transparent', 180),
         ];
         
-        var users = new Users(new Data());
+        var users = new Users(new Data('http://owa1.bravenewtalent.com/api.php', 'getLivestream'));
+        console.log(users);
 
         var visualizer = new Visualizer(columns, users);
     });
-})(jQuery);
