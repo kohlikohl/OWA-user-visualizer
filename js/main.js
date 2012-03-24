@@ -25,7 +25,6 @@
         var startVisualizing = function(data) {
             if(data.dataIsLoaded){
                 console.log('draw');
-                console.log(users);
                 var users = new Users(data);
                 var visualizer = new Visualizer(columns, users);
             } else {

@@ -10,7 +10,6 @@ function Data (requestUrl, endpoint) {
 }
 
 Data.prototype.parseData = function () {
-    console.log(this.data.data.length);
     this.currentTimestamp = this.data.current_timestamp;
     this.count = this.data.data.length;
 }
@@ -24,14 +23,12 @@ Data.prototype.getObject = function (index) {
 }
 
 Data.prototype.jsonpCallback = function(data) {
-    console.log(data);
     this.data = data;
     this.parseData();
 }
 
 Data.prototype.loadData = function() {
     var visualizer = this;
-    console.log('load Data');
     $.ajax({
         url: 'http://owa1.bravenewtalent.com/api.php',
         type: 'GET',
@@ -42,10 +39,10 @@ Data.prototype.loadData = function() {
             owa_apiKey: API_KEY,
             owa_siteId: SITE_ID,
             owa_format: 'json',
-            owa_limit: 100
+            owa_limit: 20,
         },
         success: function(data, textStatus, jqXHR){
-            console.log(data);
+    
             visualizer.data = data;
             visualizer.parseData();
             visualizer.dataIsLoaded = true;

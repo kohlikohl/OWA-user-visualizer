@@ -31,9 +31,8 @@ Visualizer.prototype.drawColumns = function () {
 
 Visualizer.prototype.drawUsers = function () {
     var visualizer = this;
-    console.log('draw users');
     $.each(this.users.getUsers(), function(index, user){
-        console.log('draw user');
+
         visualizer.drawDataPoints(user.getPageViews());
     });
 }
@@ -42,8 +41,6 @@ Visualizer.prototype.getColumnPosition = function (columnName) {
     var position = 0;
     $.each(this.columns, function(index, value){
         if(value.identifier === columnName){
-            console.log('column x', value.x);
-            console.log('IDENTIFIER', value.identifier);
             position = value.x + value.width/2;
         }
     });
@@ -57,13 +54,15 @@ Visualizer.prototype.drawDataPoints = function (pageViews) {
         prevXY;
         
     $.each(pageViews, function(index, value){
-        console.log('timestamp', value.timestamp);
-        console.log('y', visualizer.users.currentTimestamp - value.timestamp);
-        console.log('target', value.target);
+
+        console.log('URI', value.uri);
+        console.log('Target', value.target);
+        console.log('-----------------------');
+        console.log('');
         
         y = visualizer.users.currentTimestamp - value.timestamp;
         x = visualizer.getColumnPosition(value.target);
-        console.log('X', x);
+
         
         var c = visualizer.canvas.circle(x, y, 5);
         c.attr('fill','rgba(255, 255, 255, 0.2)');
