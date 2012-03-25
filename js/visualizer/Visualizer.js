@@ -13,10 +13,11 @@ function Visualizer(columns, users) {
 Visualizer.prototype.setUp = function() {
     this.DOT_DEFAULT_COLOR = 'rgba(120, 120, 120, 1)';
     this.COLOR_TRANSPARENT = 'transparent';
+    this.OFFSET_TOP = 110;
 }
 
 Visualizer.prototype.createCanvas = function () {
-    this.canvas = Raphael(0, 110, 1800, 890);
+    this.canvas = Raphael(0, this.OFFSET_TOP, 1800, 890);
 }
 
 Visualizer.prototype.drawColumns = function () {
@@ -78,6 +79,8 @@ Visualizer.prototype.drawDataPoints = function (pageViews) {
         console.log('Target', value.target);
         console.log('-----------------------');
         console.log('');
+
+        value = visualizer.checkMapping(value);
         
         y = visualizer.users.currentTimestamp - value.timestamp;
         x = visualizer.getColumnPosition(value.target);
@@ -87,6 +90,7 @@ Visualizer.prototype.drawDataPoints = function (pageViews) {
         }
         
         circles.push({x:x,y:y, color: visualizer.getColumnColor(value.target)});
+        new Tooltip({x:x,y:y+ visualizer.OFFSET_TOP}, value.uri);
         
         prevXY = {
             x: x,
@@ -138,4 +142,37 @@ Visualizer.prototype.darkenColor = function(color, amt) {
         c2 = Color(color.hex);
 
         return c2.darken(amt).hexString();
+}
+
+Visualizer.prototype.checkMapping = function(pageView){
+    console.log('checkMapping');
+    console.log(pageView.uri.search(/skills/i));
+    var pages = [
+        {
+            name: 'skills',
+            mapping: 'skills'
+        },
+        {
+            name: 'onboarding',
+            mapping: 'onboarding'
+        },
+        {
+            name: 'employers',
+            mapping: 'organisation'
+        }
+    ],
+        regex;
+
+    $.each(pages, function(index, value){
+        regex = new RegExp(value.name, 'i');
+        if(pageView.uri.search(regex) > 0){
+            pageView.target = value.mapping;
+        }
+    });
+
+    if(pageView.uri === '/'){
+            pageView.target = 'hom';
+    }
+
+    return pageView;
 }

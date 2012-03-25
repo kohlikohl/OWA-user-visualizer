@@ -21,8 +21,8 @@ body{
     font-weight: bold;
     display: inline-block;
     margin-bottom: 9px;
-    position: relative;
-    display: none;
+    position: absolute;
+    /*display: none;*/
 }
 
 .tooltip .tail {
