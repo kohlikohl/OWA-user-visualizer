@@ -11,13 +11,13 @@
         COLUMN_ONBOARDING = 'onboarding';
         
         var columns = [
-            new Column('Homepage', COLUMN_HOMEPAGE, 'transparent', 180),
-            new Column('Onboarding', COLUMN_ONBOARDING, 'transparent', 180),
-            new Column('Talent', COLUMN_TALENT, 'transparent', 180),
-            new Column('Skills', COLUMN_SKILLS, 'transparent', 180),
-            new Column('Employers', COLUMN_EMPLOYERS, 'transparent', 180),
-            new Column('Search', COLUMN_SEARCH, 'transparent', 180),
-            new Column('Content', COLUMN_CONTENT, 'transparent', 180),
+            new Column('Homepage', COLUMN_HOMEPAGE, '#967551', 180),
+            new Column('Onboarding', COLUMN_ONBOARDING, '#aa0663', 180),
+            new Column('Talent', COLUMN_TALENT, '#327fce', 180),
+            new Column('Skills', COLUMN_SKILLS, '#ec6400', 180),
+            new Column('Employers', COLUMN_EMPLOYERS, '#80b50d', 180),
+            new Column('Search', COLUMN_SEARCH, '#452070', 180),
+            new Column('Content', COLUMN_CONTENT, '#126c92', 180),
         ];
         
         var data = new Data('http://owa1.bravenewtalent.com/api.php', 'getLivestream');
