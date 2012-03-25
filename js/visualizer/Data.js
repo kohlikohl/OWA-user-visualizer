@@ -1,16 +1,20 @@
 function Data (requestUrl, endpoint) {
     this.currentTimestamp = null;
+    this.timestampDiff = 0;
     this.count = null;
     
     this.requestUrl = requestUrl;
     this.endpoint = endpoint;
     this.dataIsLoaded = false;
     
-    this.loadData();
+    //this.loadData();
 }
 
 Data.prototype.parseData = function () {
     this.currentTimestamp = this.data.current_timestamp;
+    var localTimestamp = Math.round(new Date().getTime() / 1000);
+    this.timestampDiff = this.currentTimestamp - localTimestamp;
+
     this.count = this.data.data.length;
 }
 
@@ -29,6 +33,7 @@ Data.prototype.jsonpCallback = function(data) {
 
 Data.prototype.loadData = function() {
     var visualizer = this;
+    //this.dataIsLoaded = false;
     $.ajax({
         url: 'http://owa1.bravenewtalent.com/api.php',
         type: 'GET',

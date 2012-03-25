@@ -21,18 +21,30 @@
         ];
         
         var data = new Data('http://owa1.bravenewtalent.com/api.php', 'getLivestream');
+        var visualizer = new Visualizer(columns);
+        var lastLoaded = 0;
         
         var startVisualizing = function(data) {
-            if(data.dataIsLoaded){
-                console.log('draw');
-                var users = new Users(data);
-                var visualizer = new Visualizer(columns, users);
-            } else {
-                console.log('timeout');
-                setTimeout(startVisualizing, 500, data);
+            console.log('draw');
+            var users = new Users(data);
+            
+            visualizer.setUsers(users);
+            visualizer.draw();
+
+            setTimeout(cycle, 1000, data);
+        },
+
+        cycle = function(data) {
+            var now = Math.round(new Date().getTime() / 1000) + data.timestampDiff;
+
+            if((now - lastLoaded) >= 10){
+                data.loadData();
+                lastLoaded = now;
             }
-        };
+            data.currentTimestamp = now;
+            startVisualizing(data);
+        }
         
-        startVisualizing(data);
+        cycle(data);
        
     });

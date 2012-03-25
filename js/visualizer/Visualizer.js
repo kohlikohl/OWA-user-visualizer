@@ -6,14 +6,24 @@ function Visualizer(columns, users) {
     this.users = users;
 
     this.createCanvas();
-    this.drawColumns();
-    this.drawUsers();
 }
 
 Visualizer.prototype.setUp = function() {
     this.DOT_DEFAULT_COLOR = 'rgba(120, 120, 120, 1)';
     this.COLOR_TRANSPARENT = 'transparent';
     this.OFFSET_TOP = 110;
+}
+
+Visualizer.prototype.setUsers = function(users) {
+    this.users = users;
+}
+
+Visualizer.prototype.draw = function() {
+    this.canvas.clear();
+    $('div.tooltip').remove();
+
+    this.drawColumns();
+    this.drawUsers();
 }
 
 Visualizer.prototype.createCanvas = function () {
@@ -82,7 +92,7 @@ Visualizer.prototype.drawDataPoints = function (pageViews) {
 
         value = visualizer.checkMapping(value);
         
-        y = visualizer.users.currentTimestamp - value.timestamp;
+        y = (visualizer.users.currentTimestamp - value.timestamp) * 2;
         x = visualizer.getColumnPosition(value.target);
 
         if(typeof prevXY !== 'undefined'){
